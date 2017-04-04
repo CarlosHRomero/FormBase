@@ -36,6 +36,9 @@
     <Reference Include="Generales">
       <HintPath>..\Generales\dll\Generales.dll</HintPath>
     </Reference>
+    <Reference Include="GridNavigator">
+      <HintPath>..\GridNavigator\GridNavigator\bin\Release\GridNavigator.dll</HintPath>
+    </Reference>
     <Reference Include="icbaTextBox">
       <HintPath>..\Common\trunk\Common\dll\icbaTextBox.dll</HintPath>
     </Reference>
@@ -69,6 +72,12 @@
     <Compile Include="frmBase.Designer.cs">
       <DependentUpon>frmBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListado.designer.cs">
+      <DependentUpon>frmListado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmABMGui.resx">
       <DependentUpon>frmABMGui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListado.resx">
+      <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

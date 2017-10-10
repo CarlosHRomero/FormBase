@@ -7,7 +7,9 @@ using System.Text;
 using System.Windows.Forms;
 using DrawFlat;
 using Generales;
+using Common.BLL;
 using System.Reflection;
+using PetaPoco;
 
 namespace FormBase
 {
@@ -43,28 +45,51 @@ namespace FormBase
 
         protected TipoAccion _accion;
 
-        protected Boolean cargado;
+        protected virtual bool Cargado { get; set; }
 
+        public int Id { get; set; }
+        public virtual object Registro { get; set; }
         private void frmABM_Load(object sender, EventArgs e)
         {
-
         }
-        protected virtual bool Alta()
+
+        protected virtual void CargarCabecera()
         {
             throw new NotImplementedException();
+        }
+        protected virtual void InicializarDesplegables()
+        {
+            throw new NotImplementedException();
+        }
+        protected virtual ITablaBuss TablaBuss{get; set;}
+        
+
+        protected virtual bool Alta()
+        {
+            try
+            {
+                if (!TablaBuss.Insertar(Registro))
+                    Mensajes.msgError("Error al Insertar registro");
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Mensajes.msgError("Alta", ex);
+                return false;
+            }
         }
 
         protected virtual bool Baja()
         {
-            throw new NotImplementedException();
+            return TablaBuss.Eliminar(Registro);
         }
 
         protected virtual bool Modif()
         {
-            throw new NotImplementedException();
+            return TablaBuss.Modificar(Registro);
         }
 
-        protected virtual void Display()
+        protected virtual void OcultarControles()
         {
             return;
         }
@@ -85,7 +110,7 @@ namespace FormBase
                 switch (_accion)
                 {
                     case TipoAccion.Alta:
-                        Text = Titulo + " Alta";
+                        Text = Titulo + " Nuevo";
                         break;
                     case TipoAccion.Baja:
                         Text = Titulo + " Baja";
@@ -99,87 +124,28 @@ namespace FormBase
                 }
             }
         }
-        public virtual object Registro { get; set; }
+        
         protected virtual bool LeerRegistro()
         {
-            throw new NotImplementedException();
-        }
-        protected Boolean CargarRegistro()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected Boolean CampoAControl(Control c, PropertyInfo campo)
-        {
-            //if (campo.Name == "ATC_Obs_T")
-            //    MessageBox.Show("");
-            //if (campo.Name == "Comp_EEF_D")
-
-            //    c.Name = c.Name;
-            if (!(c is MaskedTextBox || c is TextBox || c is CheckBox || c is FlatComboBox || c is ComboBox || c is icbaCheckBox))
-                return true;
-            if (String.IsNullOrEmpty(c.Name))
-                return true;
-            object valor = campo.GetValue(Registro, null);
             try
             {
-                if (c.Name.Substring(3).ToLower() == campo.Name.ToLower())
-                {
-                    //if (c.Name == "cboATC_CCG_Vinc")
-                    //    MessageBox.Show("");
-                    // c.Tag = c.Tag;
-
-                    String tipoCont = c.GetType().Name;
-                    if (c is TextBox || c is MaskedTextBox)
-                    {
-
-                        switch (campo.Name.Substring(campo.Name.Length - 1))
-                        {
-                            case "H":
-                                c.Text = ((DateTime)valor).ToString("HH:mm");
-                                break;
-                            case "F":
-                                c.Text = ((DateTime)valor).ToShortDateString();
-                                break;
-                            default:
-                                if (campo.PropertyType == typeof(DateTime?))
-                                    c.Text = ((DateTime)valor).ToShortDateString();
-                                else if (campo.PropertyType == typeof(double?) || campo.PropertyType == typeof(double))
-                                    c.Text = ((double)valor).ToString("N2");
-                                else if (campo.PropertyType == typeof(float?) || campo.PropertyType == typeof(float))
-                                    c.Text = ((float)valor).ToString("N2");
-                                else
-                                    c.Text = valor.ToString();
-                                break;
-
-                        }
-                    }
-                    if (c is ComboBox)
-                    {
-                        ((FlatComboBox)c).SelectedValue = Convert.ToInt32(valor);
-                    }
-                    var box = c as CheckBox;
-                    if (c is CheckBox)
-                    {
-
-                        ((CheckBox)c).Checked = Convert.ToBoolean(valor);
-                    }
-                    if (c is icbaCheckBox)
-                    {
-
-                        ((icbaCheckBox)c).Checked = Convert.ToBoolean(valor);
-                    }
-
-                }
+                Registro = TablaBuss.Leer(Id);
                 return true;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                MessageBox.Show("campo " + c.Name + " control " + c.Name + " " + ex.Message, "CampoAControl", MessageBoxButtons.OK);
+                Mensajes.msgError(ex);
                 return false;
             }
 
         }
+        protected Boolean CargarRegistro()
+        {
+            if (!LeerRegistro())
+                return false;
+            return true;
+        }
+
         protected virtual bool ActualizarRegistro()
         {
             throw new NotImplementedException();
@@ -189,20 +155,22 @@ namespace FormBase
         {
             try
             {
-                //if (campo.Name == "Comp_EEF_D")
-                //    c.Name = c.Name;
-  
+                //if (string.IsNullOrEmpty(c.Text))
+                //    return true;
+                if (EsClavePrimaria(campo))
+                    return true;
+                if (campo.Name == "Ingr_HTA_T")
+                    c.Name = c.Name;
                 String tipoCont = c.GetType().Name;
                 if (c.Name.Length > 3)
                 {
                     if (c.Name.Substring(3).ToLower() == campo.Name.ToLower())
                     {
-                        if (campo.Name == "Est_Obs_T")
+                        if (campo.Name == "Evol_Obs")
                             c.Name = c.Name;
                         var box = c as MaskedTextBox;
-                        if ((box != null))
+                        if ((box is MaskedTextBox ))
                         {
-
                             try
                             {
                                 if (campo.PropertyType == typeof(DateTime?) || campo.PropertyType == typeof(DateTime))
@@ -279,11 +247,14 @@ namespace FormBase
 
                                 try
                                 {
-                                    campo.SetValue(Registro, Convert.ToInt16(valor2), null);
+                                    if (campo.PropertyType == typeof(Int16) || campo.PropertyType == typeof(Int16?))
+                                        campo.SetValue(Registro, Convert.ToInt16(valor2), null);
+                                    else if (campo.PropertyType == typeof(Int32) || campo.PropertyType == typeof(Int32?))
+                                        campo.SetValue(Registro, Convert.ToInt32(valor2), null);
                                 }
-                                catch
+                                catch(Exception ex)
                                 {
-                                    campo.SetValue(Registro, Convert.ToInt32(valor2), null);
+                                    throw (ex);
                                 }
                             }
                         }
@@ -314,6 +285,19 @@ namespace FormBase
                 MessageBox.Show("campo: " + campo.Name.ToString() + " control: " + c.Name + ex.Message, "ControlACampo", MessageBoxButtons.OK);
                 return false;
             }
+        }
+
+        private bool EsClavePrimaria(PropertyInfo campo)
+        {
+            var obj = Registro;
+
+            var pkAttribute = obj.GetType().GetCustomAttributes(typeof(PrimaryKeyAttribute), true)[0] as PrimaryKeyAttribute;
+            if (pkAttribute != null)
+            {
+                if (pkAttribute.Value == campo.Name)
+                    return true;
+            }
+            return false;
         }
 
         private void frmParent_FormClosing(object sender, FormClosingEventArgs e)
@@ -364,6 +348,7 @@ namespace FormBase
             {
                 if (!ActualizarRegistro())
                 {
+                    Mensajes.msgError("Error al actualizar registro en Guardar()");
                     return;
                 }
 
@@ -374,8 +359,8 @@ namespace FormBase
                         if (Baja())
                         {
                             Mensajes.msgRegistroBorrado();
-                            if (padre != null)
-                                padre.Actualizar();
+                            ActualizarListado();
+                            Modificado = false;
                             this.Close();
                         }
                         else
@@ -390,9 +375,10 @@ namespace FormBase
                     //{
                     if (Modif())
                     {
-                        //Mensajes.msgRegistroActualizado();
+                        Mensajes.msgRegistroActualizado();
                         if (padre != null)
                             padre.Actualizar();
+                        Modificado = false;
                         this.Close();
                     }
                     else
@@ -405,9 +391,11 @@ namespace FormBase
                 {
                     if (Alta())
                     {
+                        AbrirFormSig();
                         //Mensajes.msgRegistroInsertado();
                         if (padre != null)
                             padre.Actualizar();
+                        Modificado = false;
                         this.Close();
                     }
                     else
@@ -423,5 +411,44 @@ namespace FormBase
             }
         }
 
+        protected virtual void ActualizarListado()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual void AbrirFormSig()
+        {
+            return;
+        }
+        protected void LimpiarControl(Control c)
+        {
+
+            if (c is CheckBox )
+            {
+                var box = (CheckBox)c;
+                box.Checked = false;
+                return;
+            }
+            if (c is icbaCheckBox)
+            {
+                var box = (icbaCheckBox)c;
+                box.Checked = false;
+                //return;
+            }
+            var comboBox = c as ComboBox;
+            if (comboBox != null)
+            {
+                if (c.Name == "cboAnt_Arr_ExtrSistol_Tip_D")
+                    c.Name = c.Name;
+                if (!String.IsNullOrEmpty(comboBox.ValueMember))
+                    comboBox.SelectedValue = 1;
+                ((FlatComboBox)c).Visible = false;
+                return;
+            }
+            var textBox = c as TextBox;
+            if (textBox != null)
+                textBox.Text = null;
+            c.Visible = false;
+        }
     }
 }

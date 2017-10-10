@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmABMGui));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ToolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnConfig = new System.Windows.Forms.ToolStripButton();
@@ -43,13 +51,22 @@
             this.btnValidar = new System.Windows.Forms.ToolStripButton();
             this.btnCancelar = new System.Windows.Forms.ToolStripButton();
             this.btnGuardar = new System.Windows.Forms.ToolStripButton();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Error = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodError = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TabControl1 = new System.Windows.Forms.TabControl();
             this.tpValidar = new System.Windows.Forms.TabPage();
+            this.dgvErrores = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.ToolStrip1.SuspendLayout();
             this.Panel2.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.TabControl1.SuspendLayout();
+            this.tpValidar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvErrores)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -58,7 +75,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(816, 45);
+            this.panel1.Size = new System.Drawing.Size(838, 45);
             this.panel1.TabIndex = 0;
             // 
             // ToolStrip1
@@ -163,7 +180,7 @@
             this.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Panel2.Location = new System.Drawing.Point(0, 295);
             this.Panel2.Name = "Panel2";
-            this.Panel2.Size = new System.Drawing.Size(816, 47);
+            this.Panel2.Size = new System.Drawing.Size(838, 47);
             this.Panel2.TabIndex = 2;
             // 
             // toolStrip2
@@ -176,10 +193,11 @@
             this.btnValidar,
             this.btnCancelar,
             this.btnGuardar});
-            this.toolStrip2.Location = new System.Drawing.Point(661, 7);
+            this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.toolStrip2.Location = new System.Drawing.Point(630, 7);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(87, 31);
+            this.toolStrip2.Size = new System.Drawing.Size(85, 31);
             this.toolStrip2.TabIndex = 66;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -235,6 +253,33 @@
             this.btnGuardar.ToolTipText = "Guardar";
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
+            // Descripcion
+            // 
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Maroon;
+            this.Descripcion.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Descripcion.HeaderText = "Descripción del error";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.ReadOnly = true;
+            this.Descripcion.Width = 800;
+            // 
+            // Error
+            // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightBlue;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Maroon;
+            this.Error.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Error.HeaderText = "Error";
+            this.Error.Name = "Error";
+            this.Error.ReadOnly = true;
+            // 
+            // CodError
+            // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightBlue;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Maroon;
+            this.CodError.DefaultCellStyle = dataGridViewCellStyle3;
+            this.CodError.HeaderText = "CodError";
+            this.CodError.Name = "CodError";
+            this.CodError.ReadOnly = true;
+            // 
             // TabControl1
             // 
             this.TabControl1.Controls.Add(this.tpValidar);
@@ -242,28 +287,93 @@
             this.TabControl1.Location = new System.Drawing.Point(0, 45);
             this.TabControl1.Name = "TabControl1";
             this.TabControl1.SelectedIndex = 0;
-            this.TabControl1.Size = new System.Drawing.Size(816, 250);
+            this.TabControl1.Size = new System.Drawing.Size(838, 250);
             this.TabControl1.TabIndex = 3;
             // 
             // tpValidar
             // 
+            this.tpValidar.Controls.Add(this.dgvErrores);
             this.tpValidar.Location = new System.Drawing.Point(4, 22);
             this.tpValidar.Name = "tpValidar";
             this.tpValidar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpValidar.Size = new System.Drawing.Size(808, 224);
+            this.tpValidar.Size = new System.Drawing.Size(830, 224);
             this.tpValidar.TabIndex = 0;
             this.tpValidar.Text = "Validar";
             this.tpValidar.UseVisualStyleBackColor = true;
             // 
+            // dgvErrores
+            // 
+            this.dgvErrores.AllowUserToAddRows = false;
+            this.dgvErrores.AllowUserToDeleteRows = false;
+            this.dgvErrores.BackgroundColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Maroon;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvErrores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvErrores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightBlue;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvErrores.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvErrores.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvErrores.EnableHeadersVisualStyles = false;
+            this.dgvErrores.Location = new System.Drawing.Point(3, 3);
+            this.dgvErrores.Name = "dgvErrores";
+            this.dgvErrores.ReadOnly = true;
+            this.dgvErrores.RowHeadersVisible = false;
+            this.dgvErrores.Size = new System.Drawing.Size(824, 218);
+            this.dgvErrores.TabIndex = 5;
+            this.dgvErrores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvErrores_CellDoubleClick);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightBlue;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Maroon;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewTextBoxColumn1.HeaderText = "CodError";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightBlue;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Maroon;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Error";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Maroon;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Descripción del error";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 800;
+            // 
             // frmABMGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(816, 342);
+            this.ClientSize = new System.Drawing.Size(838, 342);
             this.Controls.Add(this.TabControl1);
             this.Controls.Add(this.Panel2);
             this.Controls.Add(this.panel1);
             this.Name = "frmABMGui";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmABMGui_FormClosing);
+            this.Load += new System.EventHandler(this.frmABMGui_Load);
             this.panel1.ResumeLayout(false);
             this.ToolStrip1.ResumeLayout(false);
             this.ToolStrip1.PerformLayout();
@@ -272,13 +382,14 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.TabControl1.ResumeLayout(false);
+            this.tpValidar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvErrores)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel Panel2;
         internal System.Windows.Forms.ToolStrip ToolStrip1;
         internal System.Windows.Forms.ToolStripButton btnConfig;
         internal System.Windows.Forms.ToolStripButton btnVer;
@@ -286,13 +397,21 @@
         internal System.Windows.Forms.ToolStripButton btnBaja;
         internal System.Windows.Forms.ToolStripButton ToolStripButton6;
         internal System.Windows.Forms.ToolStripButton btnSalir;
-        private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripButton btnValidar;
         private System.Windows.Forms.ToolStripButton btnCancelar;
         private System.Windows.Forms.ToolStripButton btnGuardar;
         protected System.Windows.Forms.Panel panel1;
-        protected System.Windows.Forms.TabPage tpValidar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Error;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodError;
         protected System.Windows.Forms.TabControl TabControl1;
+        protected System.Windows.Forms.TabPage tpValidar;
+        protected System.Windows.Forms.ToolStrip toolStrip2;
+        protected System.Windows.Forms.Panel Panel2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        protected System.Windows.Forms.DataGridView dgvErrores;
     }
 }

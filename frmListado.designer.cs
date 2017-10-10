@@ -29,11 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListado));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.btnRoll2 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.stlEstado = new System.Windows.Forms.Label();
+            this.gridNavigator1 = new GridNavigator.GridNavigator();
             this.DataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txtFFObitoIni = new System.Windows.Forms.MaskedTextBox();
-            this.txtFNacIni = new System.Windows.Forms.MaskedTextBox();
-            this.txtFProcIni = new System.Windows.Forms.MaskedTextBox();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.panelFiltro = new System.Windows.Forms.Panel();
+            this.txtPad = new System.Windows.Forms.Label();
             this.ToolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdmFrm = new System.Windows.Forms.ToolStripButton();
             this.btnExportarAExcel = new System.Windows.Forms.ToolStripButton();
@@ -47,96 +51,113 @@
             this.ToolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.ToolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.Panel2 = new System.Windows.Forms.Panel();
-            this.FTel = new System.Windows.Forms.TextBox();
-            this.FFNacFin = new System.Windows.Forms.MaskedTextBox();
-            this.txtFFObitoFin = new System.Windows.Forms.MaskedTextBox();
-            this.cboTipoProc = new DrawFlat.FlatComboBox();
-            this.txtFprocFin = new System.Windows.Forms.MaskedTextBox();
-            this.cboProc = new DrawFlat.FlatComboBox();
-            this.FNombre = new System.Windows.Forms.TextBox();
-            this.txtHCF = new System.Windows.Forms.TextBox();
-            this.TextBox1 = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.stlEstado = new System.Windows.Forms.Label();
-            this.gridNavigator1 = new GridNavigator.GridNavigator();
-            this.btnRoll2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.ToolStrip1.SuspendLayout();
-            this.Panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
+            this.panelHeader.SuspendLayout();
+            this.panelFiltro.SuspendLayout();
+            this.ToolStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnRoll2
+            // 
+            this.btnRoll2.FlatAppearance.BorderSize = 0;
+            this.btnRoll2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRoll2.Image = ((System.Drawing.Image)(resources.GetObject("btnRoll2.Image")));
+            this.btnRoll2.Location = new System.Drawing.Point(415, 117);
+            this.btnRoll2.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRoll2.Name = "btnRoll2";
+            this.btnRoll2.Size = new System.Drawing.Size(20, 19);
+            this.btnRoll2.TabIndex = 28;
+            this.btnRoll2.Text = "\r\n";
+            this.btnRoll2.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.stlEstado);
+            this.panel3.Controls.Add(this.gridNavigator1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 195);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(906, 22);
+            this.panel3.TabIndex = 27;
+            // 
+            // stlEstado
+            // 
+            this.stlEstado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.stlEstado.Dock = System.Windows.Forms.DockStyle.Left;
+            this.stlEstado.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stlEstado.ForeColor = System.Drawing.Color.Maroon;
+            this.stlEstado.Location = new System.Drawing.Point(207, 0);
+            this.stlEstado.Name = "stlEstado";
+            this.stlEstado.Size = new System.Drawing.Size(125, 22);
+            this.stlEstado.TabIndex = 2;
+            this.stlEstado.Text = "label1";
+            this.stlEstado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // gridNavigator1
+            // 
+            this.gridNavigator1.DataSource = this.DataGridView1;
+            this.gridNavigator1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gridNavigator1.Location = new System.Drawing.Point(0, 0);
+            this.gridNavigator1.Name = "gridNavigator1";
+            this.gridNavigator1.Size = new System.Drawing.Size(207, 22);
+            this.gridNavigator1.TabIndex = 0;
             // 
             // DataGridView1
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridView1.EnableHeadersVisualStyles = false;
             this.DataGridView1.Location = new System.Drawing.Point(100, 62);
             this.DataGridView1.Name = "DataGridView1";
+            this.DataGridView1.ReadOnly = true;
             this.DataGridView1.Size = new System.Drawing.Size(564, 150);
             this.DataGridView1.TabIndex = 0;
+            this.DataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellDoubleClick);
             this.DataGridView1.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_ColumnHeaderMouseDoubleClick);
+            this.DataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridView1_DataError);
             this.DataGridView1.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.DataGridView1_SortCompare);
             // 
-            // panel1
+            // panelHeader
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.txtFFObitoIni);
-            this.panel1.Controls.Add(this.txtFNacIni);
-            this.panel1.Controls.Add(this.txtFProcIni);
-            this.panel1.Controls.Add(this.ToolStrip1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(906, 31);
-            this.panel1.TabIndex = 0;
+            this.panelHeader.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelHeader.Controls.Add(this.panelFiltro);
+            this.panelHeader.Controls.Add(this.ToolStrip1);
+            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Margin = new System.Windows.Forms.Padding(2);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(906, 50);
+            this.panelHeader.TabIndex = 0;
             // 
-            // txtFFObitoIni
+            // panelFiltro
             // 
-            this.txtFFObitoIni.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtFFObitoIni.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFFObitoIni.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFFObitoIni.Location = new System.Drawing.Point(496, 2);
-            this.txtFFObitoIni.Margin = new System.Windows.Forms.Padding(2);
-            this.txtFFObitoIni.Mask = "00/00/0000";
-            this.txtFFObitoIni.Name = "txtFFObitoIni";
-            this.txtFFObitoIni.Size = new System.Drawing.Size(64, 20);
-            this.txtFFObitoIni.TabIndex = 1;
-            this.txtFFObitoIni.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtFFObitoIni.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFFObitoIni.ValidatingType = typeof(System.DateTime);
+            this.panelFiltro.Controls.Add(this.txtPad);
+            this.panelFiltro.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelFiltro.Location = new System.Drawing.Point(0, 27);
+            this.panelFiltro.Margin = new System.Windows.Forms.Padding(2);
+            this.panelFiltro.Name = "panelFiltro";
+            this.panelFiltro.Size = new System.Drawing.Size(904, 21);
+            this.panelFiltro.TabIndex = 22;
             // 
-            // txtFNacIni
+            // txtPad
             // 
-            this.txtFNacIni.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtFNacIni.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFNacIni.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFNacIni.Location = new System.Drawing.Point(580, 2);
-            this.txtFNacIni.Margin = new System.Windows.Forms.Padding(2);
-            this.txtFNacIni.Mask = "00/00/0000";
-            this.txtFNacIni.Name = "txtFNacIni";
-            this.txtFNacIni.Size = new System.Drawing.Size(83, 20);
-            this.txtFNacIni.TabIndex = 2;
-            this.txtFNacIni.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtFNacIni.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFNacIni.ValidatingType = typeof(System.DateTime);
-            // 
-            // txtFProcIni
-            // 
-            this.txtFProcIni.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtFProcIni.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFProcIni.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFProcIni.Location = new System.Drawing.Point(348, 6);
-            this.txtFProcIni.Margin = new System.Windows.Forms.Padding(2);
-            this.txtFProcIni.Mask = "00/00/0000";
-            this.txtFProcIni.Name = "txtFProcIni";
-            this.txtFProcIni.Size = new System.Drawing.Size(64, 20);
-            this.txtFProcIni.TabIndex = 0;
-            this.txtFProcIni.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtFProcIni.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFProcIni.ValidatingType = typeof(System.DateTime);
+            this.txtPad.BackColor = System.Drawing.SystemColors.Control;
+            this.txtPad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPad.Dock = System.Windows.Forms.DockStyle.Left;
+            this.txtPad.Enabled = false;
+            this.txtPad.Location = new System.Drawing.Point(0, 0);
+            this.txtPad.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPad.Name = "txtPad";
+            this.txtPad.Size = new System.Drawing.Size(31, 21);
+            this.txtPad.TabIndex = 16;
             // 
             // ToolStrip1
             // 
@@ -152,10 +173,10 @@
             this.ToolStripButton3,
             this.ToolStripButton5,
             this.btnSalir});
-            this.ToolStrip1.Location = new System.Drawing.Point(696, 2);
+            this.ToolStrip1.Location = new System.Drawing.Point(671, 0);
             this.ToolStrip1.Name = "ToolStrip1";
             this.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.ToolStrip1.Size = new System.Drawing.Size(147, 27);
+            this.ToolStrip1.Size = new System.Drawing.Size(235, 27);
             this.ToolStrip1.TabIndex = 0;
             this.ToolStrip1.Text = "ToolStrip1";
             // 
@@ -172,7 +193,8 @@
             // 
             // btnExportarAExcel
             // 
-            this.btnExportarAExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;            
+            this.btnExportarAExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExportarAExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportarAExcel.Image")));
             this.btnExportarAExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExportarAExcel.Name = "btnExportarAExcel";
             this.btnExportarAExcel.Size = new System.Drawing.Size(24, 24);
@@ -189,14 +211,12 @@
             this.btnAlta,
             this.btnBaja,
             this.btnModif});
-            this.btnAbm.Enabled = false;
             this.btnAbm.Image = ((System.Drawing.Image)(resources.GetObject("btnAbm.Image")));
             this.btnAbm.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAbm.Name = "btnAbm";
             this.btnAbm.Size = new System.Drawing.Size(33, 24);
             this.btnAbm.Text = "toolStripDropDownButton1";
             this.btnAbm.ToolTipText = "ABM";
-            this.btnAbm.Visible = false;
             // 
             // btnVer
             // 
@@ -209,6 +229,7 @@
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(184, 26);
             this.btnAlta.Text = "Altas";
+            this.btnAlta.Click += new System.EventHandler(this.btnAlta_Click);
             // 
             // btnBaja
             // 
@@ -276,203 +297,6 @@
             this.btnSalir.ToolTipText = "Salir";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // Panel2
-            // 
-            this.Panel2.Controls.Add(this.FTel);
-            this.Panel2.Controls.Add(this.FFNacFin);
-            this.Panel2.Controls.Add(this.txtFFObitoFin);
-            this.Panel2.Controls.Add(this.cboTipoProc);
-            this.Panel2.Controls.Add(this.txtFprocFin);
-            this.Panel2.Controls.Add(this.cboProc);
-            this.Panel2.Controls.Add(this.FNombre);
-            this.Panel2.Controls.Add(this.txtHCF);
-            this.Panel2.Controls.Add(this.TextBox1);
-            this.Panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel2.Location = new System.Drawing.Point(0, 31);
-            this.Panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.Panel2.Name = "Panel2";
-            this.Panel2.Size = new System.Drawing.Size(906, 25);
-            this.Panel2.TabIndex = 22;
-            // 
-            // FTel
-            // 
-            this.FTel.BackColor = System.Drawing.Color.SkyBlue;
-            this.FTel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FTel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.FTel.Location = new System.Drawing.Point(665, 0);
-            this.FTel.Margin = new System.Windows.Forms.Padding(2);
-            this.FTel.Name = "FTel";
-            this.FTel.Size = new System.Drawing.Size(162, 20);
-            this.FTel.TabIndex = 0;
-            // 
-            // FFNacFin
-            // 
-            this.FFNacFin.BackColor = System.Drawing.Color.SkyBlue;
-            this.FFNacFin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FFNacFin.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.FFNacFin.Dock = System.Windows.Forms.DockStyle.Left;
-            this.FFNacFin.Location = new System.Drawing.Point(581, 0);
-            this.FFNacFin.Margin = new System.Windows.Forms.Padding(2);
-            this.FFNacFin.Mask = "00/00/0000";
-            this.FFNacFin.Name = "FFNacFin";
-            this.FFNacFin.Size = new System.Drawing.Size(84, 20);
-            this.FFNacFin.TabIndex = 8;
-            this.FFNacFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.FFNacFin.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.FFNacFin.ValidatingType = typeof(System.DateTime);
-            // 
-            // txtFFObitoFin
-            // 
-            this.txtFFObitoFin.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtFFObitoFin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFFObitoFin.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFFObitoFin.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtFFObitoFin.Location = new System.Drawing.Point(497, 0);
-            this.txtFFObitoFin.Margin = new System.Windows.Forms.Padding(2);
-            this.txtFFObitoFin.Mask = "00/00/0000";
-            this.txtFFObitoFin.Name = "txtFFObitoFin";
-            this.txtFFObitoFin.Size = new System.Drawing.Size(84, 20);
-            this.txtFFObitoFin.TabIndex = 7;
-            this.txtFFObitoFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtFFObitoFin.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFFObitoFin.ValidatingType = typeof(System.DateTime);
-            // 
-            // cboTipoProc
-            // 
-            this.cboTipoProc.BackColor = System.Drawing.Color.SkyBlue;
-            this.cboTipoProc.DisplayMember = "Eqv_Val";
-            this.cboTipoProc.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cboTipoProc.Filtro = true;
-            this.cboTipoProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboTipoProc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboTipoProc.FormattingEnabled = true;
-            this.cboTipoProc.Location = new System.Drawing.Point(413, 0);
-            this.cboTipoProc.Margin = new System.Windows.Forms.Padding(2);
-            this.cboTipoProc.Name = "cboTipoProc";
-            this.cboTipoProc.ReadOnly = false;
-            this.cboTipoProc.ReadOnlyBackColor = System.Drawing.SystemColors.Control;
-            this.cboTipoProc.ReadOnlyFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboTipoProc.ReadOnlyForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboTipoProc.Size = new System.Drawing.Size(84, 21);
-            this.cboTipoProc.TabIndex = 6;
-            this.cboTipoProc.ValueMember = "Eqv_Val";
-            // 
-            // txtFprocFin
-            // 
-            this.txtFprocFin.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtFprocFin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFprocFin.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtFprocFin.Location = new System.Drawing.Point(329, 0);
-            this.txtFprocFin.Margin = new System.Windows.Forms.Padding(2);
-            this.txtFprocFin.Mask = "00/00/0000";
-            this.txtFprocFin.Name = "txtFprocFin";
-            this.txtFprocFin.Size = new System.Drawing.Size(84, 20);
-            this.txtFprocFin.TabIndex = 5;
-            this.txtFprocFin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtFprocFin.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
-            this.txtFprocFin.ValidatingType = typeof(System.DateTime);
-            // 
-            // cboProc
-            // 
-            this.cboProc.BackColor = System.Drawing.Color.SkyBlue;
-            this.cboProc.DisplayMember = "Eqv_Val";
-            this.cboProc.Dock = System.Windows.Forms.DockStyle.Left;
-            this.cboProc.Filtro = true;
-            this.cboProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboProc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboProc.FormattingEnabled = true;
-            this.cboProc.Location = new System.Drawing.Point(251, 0);
-            this.cboProc.Margin = new System.Windows.Forms.Padding(2);
-            this.cboProc.Name = "cboProc";
-            this.cboProc.ReadOnly = false;
-            this.cboProc.ReadOnlyBackColor = System.Drawing.SystemColors.Control;
-            this.cboProc.ReadOnlyFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboProc.ReadOnlyForeColor = System.Drawing.SystemColors.ControlText;
-            this.cboProc.Size = new System.Drawing.Size(78, 21);
-            this.cboProc.TabIndex = 3;
-            this.cboProc.ValueMember = "Eqv_Val";
-            // 
-            // FNombre
-            // 
-            this.FNombre.BackColor = System.Drawing.Color.SkyBlue;
-            this.FNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FNombre.Dock = System.Windows.Forms.DockStyle.Left;
-            this.FNombre.Location = new System.Drawing.Point(91, 0);
-            this.FNombre.Margin = new System.Windows.Forms.Padding(2);
-            this.FNombre.Name = "FNombre";
-            this.FNombre.Size = new System.Drawing.Size(160, 20);
-            this.FNombre.TabIndex = 2;
-            this.FNombre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtHCF
-            // 
-            this.txtHCF.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtHCF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtHCF.Dock = System.Windows.Forms.DockStyle.Left;
-            this.txtHCF.Location = new System.Drawing.Point(31, 0);
-            this.txtHCF.Margin = new System.Windows.Forms.Padding(2);
-            this.txtHCF.Name = "txtHCF";
-            this.txtHCF.Size = new System.Drawing.Size(60, 20);
-            this.txtHCF.TabIndex = 1;
-            // 
-            // TextBox1
-            // 
-            this.TextBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TextBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.TextBox1.Enabled = false;
-            this.TextBox1.Location = new System.Drawing.Point(0, 0);
-            this.TextBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.TextBox1.Name = "TextBox1";
-            this.TextBox1.Size = new System.Drawing.Size(31, 20);
-            this.TextBox1.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.stlEstado);
-            this.panel3.Controls.Add(this.gridNavigator1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 195);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(906, 22);
-            this.panel3.TabIndex = 27;
-            // 
-            // stlEstado
-            // 
-            this.stlEstado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.stlEstado.Dock = System.Windows.Forms.DockStyle.Left;
-            this.stlEstado.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stlEstado.ForeColor = System.Drawing.Color.Maroon;
-            this.stlEstado.Location = new System.Drawing.Point(207, 0);
-            this.stlEstado.Name = "stlEstado";
-            this.stlEstado.Size = new System.Drawing.Size(125, 22);
-            this.stlEstado.TabIndex = 2;
-            this.stlEstado.Text = "label1";
-            this.stlEstado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // gridNavigator1
-            // 
-            this.gridNavigator1.DataSource = this.DataGridView1;
-            this.gridNavigator1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gridNavigator1.Location = new System.Drawing.Point(0, 0);
-            this.gridNavigator1.Name = "gridNavigator1";
-            this.gridNavigator1.Size = new System.Drawing.Size(207, 22);
-            this.gridNavigator1.TabIndex = 0;
-            // 
-            // btnRoll2
-            // 
-            this.btnRoll2.FlatAppearance.BorderSize = 0;
-            this.btnRoll2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRoll2.Image = ((System.Drawing.Image)(resources.GetObject("btnRoll2.Image")));
-            this.btnRoll2.Location = new System.Drawing.Point(415, 117);
-            this.btnRoll2.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRoll2.Name = "btnRoll2";
-            this.btnRoll2.Size = new System.Drawing.Size(20, 19);
-            this.btnRoll2.TabIndex = 28;
-            this.btnRoll2.Text = "\r\n";
-            this.btnRoll2.UseVisualStyleBackColor = true;
-
-            // 
             // frmListado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -480,8 +304,7 @@
             this.ClientSize = new System.Drawing.Size(906, 217);
             this.Controls.Add(this.btnRoll2);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.Panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.DataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -490,51 +313,39 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmATCsinSg30";
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelHeader.ResumeLayout(false);
+            this.panelHeader.PerformLayout();
+            this.panelFiltro.ResumeLayout(false);
             this.ToolStrip1.ResumeLayout(false);
             this.ToolStrip1.PerformLayout();
-            this.Panel2.ResumeLayout(false);
-            this.Panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        internal System.Windows.Forms.Panel panel1;
-        internal System.Windows.Forms.MaskedTextBox txtFNacIni;
-        internal System.Windows.Forms.MaskedTextBox txtFProcIni;
-        internal System.Windows.Forms.ToolStrip ToolStrip1;
         internal System.Windows.Forms.ToolStripButton btnAdmFrm;
         internal System.Windows.Forms.ToolStripButton btnExportarAExcel;
-        private System.Windows.Forms.ToolStripDropDownButton btnAbm;
-        private System.Windows.Forms.ToolStripMenuItem btnVer;
-        private System.Windows.Forms.ToolStripMenuItem btnAlta;
-        private System.Windows.Forms.ToolStripMenuItem btnBaja;
-        private System.Windows.Forms.ToolStripMenuItem btnModif;
         internal System.Windows.Forms.ToolStripButton btnFiltrar;
         internal System.Windows.Forms.ToolStripButton btnqFiltro;
         internal System.Windows.Forms.ToolStripButton ToolStripButton3;
         internal System.Windows.Forms.ToolStripButton ToolStripButton5;
         internal System.Windows.Forms.ToolStripButton btnSalir;
-        internal System.Windows.Forms.Panel Panel2;
-        internal System.Windows.Forms.TextBox FTel;
-        internal System.Windows.Forms.MaskedTextBox FFNacFin;
-        internal DrawFlat.FlatComboBox cboTipoProc;
-        internal System.Windows.Forms.MaskedTextBox txtFprocFin;
-        internal DrawFlat.FlatComboBox cboProc;
-        internal System.Windows.Forms.TextBox FNombre;
-        internal System.Windows.Forms.TextBox txtHCF;
-        internal System.Windows.Forms.TextBox TextBox1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label stlEstado;
-        internal System.Windows.Forms.Button btnRoll2;
         protected System.Windows.Forms.DataGridView DataGridView1;
         protected GridNavigator.GridNavigator gridNavigator1;
-        internal System.Windows.Forms.MaskedTextBox txtFFObitoIni;
-        internal System.Windows.Forms.MaskedTextBox txtFFObitoFin;
+        protected System.Windows.Forms.Panel panelHeader;
+        internal System.Windows.Forms.Label txtPad;
+        protected System.Windows.Forms.Button btnRoll2;
+        protected System.Windows.Forms.Panel panelFiltro;
+        protected System.Windows.Forms.ToolStripDropDownButton btnAbm;
+        protected System.Windows.Forms.ToolStripMenuItem btnVer;
+        protected System.Windows.Forms.ToolStripMenuItem btnAlta;
+        protected System.Windows.Forms.ToolStripMenuItem btnBaja;
+        protected System.Windows.Forms.ToolStripMenuItem btnModif;
+        public System.Windows.Forms.ToolStrip ToolStrip1;
     }
 }

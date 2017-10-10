@@ -21,5 +21,14 @@ namespace FormBase
         {
             throw new NotImplementedException();
         }
+
+        protected virtual void CargarFormulario()
+        {
+            Text = Titulo;          
+        }
+
+        private void frmBase_Load(object sender, EventArgs e)
+        {
+        }
     }
 }

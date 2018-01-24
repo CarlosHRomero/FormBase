@@ -25,7 +25,7 @@ namespace FormBase
 
         protected virtual bool Validado
         {
-            get { return _validado;}
+            get { return _validado; }
             set
             {
                 _validado = value;
@@ -61,8 +61,8 @@ namespace FormBase
         {
             throw new NotImplementedException();
         }
-        protected virtual ITablaBuss TablaBuss{get; set;}
-        
+        protected virtual ITablaBuss TablaBuss { get; set; }
+
 
         protected virtual bool Alta()
         {
@@ -72,7 +72,7 @@ namespace FormBase
                     Mensajes.msgError("Error al Insertar registro");
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Mensajes.msgError("Alta", ex);
                 return false;
@@ -124,7 +124,7 @@ namespace FormBase
                 }
             }
         }
-        
+
         protected virtual bool LeerRegistro()
         {
             try
@@ -132,14 +132,14 @@ namespace FormBase
                 Registro = TablaBuss.Leer(Id);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Mensajes.msgError(ex);
                 return false;
             }
 
         }
-        protected Boolean CargarRegistro()
+        protected virtual Boolean CargarRegistro()
         {
             if (!LeerRegistro())
                 return false;
@@ -159,7 +159,7 @@ namespace FormBase
                 //    return true;
                 if (EsClavePrimaria(campo))
                     return true;
-                if (campo.Name == "Ingr_HTA_T")
+                if (campo.Name == "Dop_Prioridad_D")
                     c.Name = c.Name;
                 String tipoCont = c.GetType().Name;
                 if (c.Name.Length > 3)
@@ -169,7 +169,7 @@ namespace FormBase
                         if (campo.Name == "Evol_Obs")
                             c.Name = c.Name;
                         var box = c as MaskedTextBox;
-                        if ((box is MaskedTextBox ))
+                        if ((box is MaskedTextBox))
                         {
                             try
                             {
@@ -184,6 +184,29 @@ namespace FormBase
                                     else
                                         campo.SetValue(Registro, null, null);
                                 }
+                                else
+                                {
+                                    if (!string.IsNullOrEmpty(c.Text))
+                                    {
+                                        if (campo.PropertyType == typeof(short?) || campo.PropertyType == typeof(short))
+                                        {
+                                            campo.SetValue(Registro, Convert.ToInt16(c.Text));
+                                        }
+                                        if (campo.PropertyType == typeof(int?) || campo.PropertyType == typeof(int))
+                                        {
+                                            campo.SetValue(Registro, Convert.ToInt32(c.Text));
+                                        }
+                                        if (campo.PropertyType == typeof(float?) || campo.PropertyType == typeof(float))
+                                        {
+                                            campo.SetValue(Registro, Convert.ToSingle(c.Text));
+                                        }
+                                        if (campo.PropertyType == typeof(double?) || campo.PropertyType == typeof(double))
+                                        {
+                                            campo.SetValue(Registro, Convert.ToDouble(c.Text));
+                                        }
+                                    }
+                                }
+
                             }
                             catch (Exception ex1)
                             {
@@ -252,7 +275,7 @@ namespace FormBase
                                     else if (campo.PropertyType == typeof(Int32) || campo.PropertyType == typeof(Int32?))
                                         campo.SetValue(Registro, Convert.ToInt32(valor2), null);
                                 }
-                                catch(Exception ex)
+                                catch (Exception ex)
                                 {
                                     throw (ex);
                                 }
@@ -342,6 +365,8 @@ namespace FormBase
         {
             throw new NotImplementedException();
         }
+
+        public  bool AbrirSig { get; set; }
         protected virtual void Guardar()
         {
             try
@@ -376,8 +401,11 @@ namespace FormBase
                     if (Modif())
                     {
                         Mensajes.msgRegistroActualizado();
+                        if (AbrirSig)
+                            AbrirFormSig();                        
                         if (padre != null)
                             padre.Actualizar();
+                        ActualizarListado();
                         Modificado = false;
                         this.Close();
                     }
@@ -395,6 +423,7 @@ namespace FormBase
                         //Mensajes.msgRegistroInsertado();
                         if (padre != null)
                             padre.Actualizar();
+                        ActualizarListado();
                         Modificado = false;
                         this.Close();
                     }
@@ -423,7 +452,7 @@ namespace FormBase
         protected void LimpiarControl(Control c)
         {
 
-            if (c is CheckBox )
+            if (c is CheckBox)
             {
                 var box = (CheckBox)c;
                 box.Checked = false;

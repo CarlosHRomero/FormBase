@@ -176,10 +176,10 @@ namespace FormBase
 
         private string Nombre { get; set; }
         
-        protected  void Filtrar<T>()
+        public  void Filtrar<T>()
         {
             bool filtro = false;
-            bool Fand = false;
+
             _where = "";
             foreach (Control c in this.panelFiltro.Controls)
             {
@@ -323,9 +323,9 @@ namespace FormBase
         private void DataGridView1_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
 
-            Cursor.Current = Cursors.WaitCursor;
-            ExportadorDatos.ExportarDataGridAExcel(DataGridView1);
-            Cursor.Current = Cursors.Default;         
+            //Cursor.Current = Cursors.WaitCursor;
+            //ExportadorDatos.ExportarDataGridAExcel(DataGridView1);
+            //Cursor.Current = Cursors.Default;         
 
         }
 
@@ -344,14 +344,20 @@ namespace FormBase
             base.CargarFormulario();
             InicializarGrid();
             InicilizarFiltro();
+            CargarEventoFiltro();
             InicializarForm();
             InicializarDesplegables();
             CargarGrid();
         }
 
+        protected virtual void CargarEventoFiltro()
+        {
+            return;
+        }
+
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            MessageBox.Show(e.RowIndex.ToString() + e.ColumnIndex.ToString());
+            MessageBox.Show(string.Format("fila {0}, columna{1}", e.RowIndex.ToString(), e.ColumnIndex.ToString()));
         }
 
         private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

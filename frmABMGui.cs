@@ -81,7 +81,7 @@ namespace FormBase
         {
             Guardar();
         }
-        protected bool CargarRegistro()
+        protected override bool CargarRegistro()
         {
             if (!LeerRegistro())
                 return false;
@@ -123,7 +123,7 @@ namespace FormBase
                 foreach (PropertyInfo campo in campos)
                 {
                     int x = 0;
-                    if (campo.Name == "Ant_Cor_AngioCoro_T")
+                    if (campo.Name == "Ingr_Sintoma_D")
                         x = x;
 
                     object valor = campo.GetValue(Registro, null);
@@ -143,7 +143,6 @@ namespace FormBase
                     }
                 }
                 CargarPiePagina();
-                Cargado = true;
                 return true;
             }
             catch (Exception ex)
@@ -170,7 +169,7 @@ namespace FormBase
             {
                 if (c.Name.Substring(3).ToLower() == campo.Name.ToLower())
                 {
-                    if (c.Name == "Ingr_AHF_T")
+                    if (c.Name == "cboIngr_Sintoma_D")
                         //MessageBox.Show("");
                         c.Tag = c.Tag;
 
@@ -184,17 +183,24 @@ namespace FormBase
                                 c.Text = ((DateTime)valor).ToString("HH:mm");
                                 break;
                             case "F":
-                                c.Text = ((DateTime)valor).ToShortDateString();
+                                c.Text = ((DateTime)valor).ToString("dd/MM/yyyy");
                                 break;
                             default:
+                                List<string> lista = new List<string>(new string[]{ "AntC_ExF_FC_N", "AntC_FR_N",
+                                "AntC_TA_N", "AntC_TAc_N"});
+                                if (lista.Exists(x=> x == campo.Name))
+                                {
+                                    c.Text = ((float)valor).ToString("N0");
+                                    return true;
+                                }
                                 if (campo.PropertyType == typeof(DateTime?))
-                                    c.Text = ((DateTime)valor).ToShortDateString();
+                                    c.Text = ((DateTime)valor).ToString("dd/MM/yyyy");
                                 else if (campo.PropertyType == typeof(double?) || campo.PropertyType == typeof(double))
                                     c.Text = ((double)valor).ToString("N2");
                                 else if (campo.PropertyType == typeof(float?) || campo.PropertyType == typeof(float))
                                     c.Text = ((float)valor).ToString("N2");
                                 else
-                                    c.Text = valor.ToString();
+                                    c.Text = valor.ToString().Trim();
                                 break;
                         }
                     }
@@ -241,7 +247,7 @@ namespace FormBase
                 List<PropertyInfo> campos = new List<PropertyInfo>(tipo.GetProperties());
                 foreach (PropertyInfo campo in campos)
                 {
-                    //if (campo.Name == "Evol_Obs")
+                    //if (campo.Name == "Ant_Cor_Infarto_Año_N")
 
                     //    throw new Exception();
                     foreach (Control c in Panel2.Controls)
@@ -278,8 +284,13 @@ namespace FormBase
                 throw new Exception("Registro no inicializado");
             form = campos[0].Name.Split('_')[0];
             PropertyInfo usuProp = tipo.GetProperty(string.Format("{0}_Usr_Id", form));
-            if(Ambiente.Usuario != null)
-                usuProp.SetValue(Registro,  Convert.ToInt16(Ambiente.Usuario.User_Id));
+            if (Ambiente.Usuario != null)
+            {
+                if(usuProp.PropertyType == typeof(int) || usuProp.PropertyType == typeof(int?))
+                    usuProp.SetValue(Registro, Convert.ToInt32(Ambiente.Usuario.User_Id));
+                if (usuProp.PropertyType == typeof(short) || usuProp.PropertyType == typeof(short?))
+                    usuProp.SetValue(Registro, Convert.ToInt16(Ambiente.Usuario.User_Id));
+            }
             PropertyInfo maquina = tipo.GetProperty(string.Format("{0}_Maq", form));
             if (maquina != null)
             {
@@ -308,7 +319,13 @@ namespace FormBase
             }
             PropertyInfo prop =  tipo.GetProperty(string.Format("{0}_Prop_T",form));
             if (prop != null)
-                prop.SetValue(Registro,Convert.ToInt32(3));
+            {
+                if(prop.PropertyType == typeof(int) || prop.PropertyType == typeof(int?))
+                    prop.SetValue(Registro, Convert.ToInt32(3));
+                if (prop.PropertyType == typeof(short) || prop.PropertyType == typeof(short?))
+                    prop.SetValue(Registro, Convert.ToInt16(3));
+
+            }
             PropertyInfo da = tipo.GetProperty(string.Format("{0}_Reg_F", form));
             if(da != null)
                 da.SetValue(Registro, DateTime.Today);
@@ -611,7 +628,7 @@ namespace FormBase
 
         protected void Layaout()
         {
-            ToolStrip1.Location = new Point(Width - ToolStrip1.Width - 50, ToolStrip1.Location.Y);
+            ToolStrip1.Location = new Point(Width - ToolStrip1.Width - 30, ToolStrip1.Location.Y);
             toolStrip2.Location = new Point(Width - toolStrip2.Width - 30, ToolStrip1.Location.Y);
         }
 
@@ -635,7 +652,7 @@ namespace FormBase
                             if(box.DataSource != null)
                             {
                                 Type t = box.DataSource.GetType();
-                                if(t  == typeof(List<clsDespEquiv>))
+                                if(t  == typeof(List<clsDespEquiv>) || t == typeof (List<clsNoSi>))
                                 {
                                     box.DisplayMember = "Eqv_Desc";
                                     box.ValueMember = "Eqv_Val";
@@ -665,48 +682,61 @@ namespace FormBase
         }
         protected override void OcultarControles()
         {
-            foreach (TabPage tp in TabControl1.TabPages)
+            try
             {
-                foreach (Control c in tp.Controls)
+                foreach (TabPage tp in TabControl1.TabPages)
                 {
-                    if (c is CheckBox || c is icbaCheckBox)
+                    foreach (Control c in tp.Controls)
                     {
-                        string s;
-                        if (c.Name.Length > 3)
+                        if (c is CheckBox || c is icbaCheckBox)
                         {
-                            s = c.Name.Substring(3, c.Name.Length - 3);
-                            bool cheked = false;
-                            if (c is CheckBox)
-                                cheked = ((CheckBox)c).Checked;
-                            else if (c is icbaCheckBox)
-                                cheked = ((icbaCheckBox)c).Checked;
-                            OcultarControlesPorTag(s, cheked);
+                            string s;
+                            if (c.Name.Length > 3)
+                            {
+                                s = c.Name.Substring(3, c.Name.Length - 3);
+                                bool cheked = false;
+                                if (c is CheckBox)
+                                    cheked = ((CheckBox)c).Checked;
+                                else if (c is icbaCheckBox)
+                                    cheked = ((icbaCheckBox)c).Checked;
+                                OcultarControlesPorTag(s, cheked);
+                            }
                         }
-                    }
-                    if (c is ComboBox || c is FlatComboBox)
-                    {
-                        string s;
-                        if (c.Name.Length > 3)
+                        if (c is ComboBox || c is FlatComboBox)
                         {
-                            s = c.Name.Substring(3, c.Name.Length - 3);
-                            bool cheked = false;
-                            int n = ValorAmostrarPorDesp(c.Name);
-                            if (Convert.ToInt32(((ComboBox)c).SelectedValue) > n)
-                                OcultarControlesPorTag(s, true);
-                            else
-                                OcultarControlesPorTag(s, false);
+                            string s;
+                            if (c.Name.Length > 3)
+                            {
+                                s = c.Name.Substring(3, c.Name.Length - 3);
+                                bool cheked = false;
+                                int n = ValorAmostrarPorDesp((ComboBox)c);
+                                if(((ComboBox)c).SelectedValue != null)
+                                {
+                                    if (Convert.ToInt32(((ComboBox)c).SelectedValue) > n)
+                                        OcultarControlesPorTag(s, true);
+                                    else
+                                        OcultarControlesPorTag(s, false);
+                                }
+                                else
+                                    OcultarControlesPorTag(s, false);
+                            }
                         }
                     }
                 }
             }
+            catch(Exception ex)
+            {
+                Mensajes.msgError(ex);
+            }
         }
 
-        protected virtual int ValorAmostrarPorDesp(string p)
+        protected virtual int ValorAmostrarPorDesp(ComboBox c)
         {
             return 1;
+
         }
 
-        private void OcultarControlesPorTag(string s, bool visible)
+        protected void OcultarControlesPorTag(string tag, bool visible)
         {
             foreach (TabPage tb in TabControl1.TabPages)
             {
@@ -714,7 +744,7 @@ namespace FormBase
                 {
                     if (c.Tag != null)
                     {
-                        if (c.Tag.ToString() == s)
+                        if (c.Tag.ToString() == tag)
                         {
                             if (visible)
                             {

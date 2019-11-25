@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GridNavigator">
-      <HintPath>..\GridNavigator\GridNavigator\bin\Release\GridNavigator.dll</HintPath>
+      <HintPath>..\GridNavigator\GridNavigator\bin\Debug\GridNavigator.dll</HintPath>
     </Reference>
     <Reference Include="icbaTextBox">
-      <HintPath>..\Common\trunk\Common\dll\icbaTextBox.dll</HintPath>
+      <HintPath>..\Hemodinamia\Antonio\icbaTextBox\bin\Debug\icbaTextBox.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\Cardiologia\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -103,11 +103,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\trunk\Common\Common.BLL\Common.BLL\Common.BLL.csproj">
+    <ProjectReference Include="..\Common\Common\Common.BLL\Common.BLL\Common.BLL.csproj">
       <Project>{3dd97d1e-e0d5-48b6-a8c3-04b772d434a0}</Project>
       <Name>Common.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common\trunk\Common\Common.OBJ\Common.OBJ.csproj">
+    <ProjectReference Include="..\Common\Common\Common.OBJ\Common.OBJ.csproj">
       <Project>{423e4d38-8f89-4a65-8a35-d6af22d1c79c}</Project>
       <Name>Common.OBJ</Name>
     </ProjectReference>
@@ -115,7 +115,7 @@
       <Project>{50d756df-a3e9-4dad-a226-493f65005d85}</Project>
       <Name>Generales</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hemodinamia\trunk\Antonio\DrawFlat\DrawFlat.csproj">
+    <ProjectReference Include="..\Hemodinamia\Antonio\DrawFlat\DrawFlat.csproj">
       <Project>{7c5667b5-7be0-4d75-b9bc-57f3b376f3fb}</Project>
       <Name>DrawFlat</Name>
     </ProjectReference>

@@ -176,7 +176,7 @@ namespace FormBase
 
         private string Nombre { get; set; }
         
-        public  void Filtrar<T>()
+        public virtual void Filtrar<T>()
         {
             bool filtro = false;
 

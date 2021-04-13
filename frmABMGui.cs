@@ -566,13 +566,13 @@ namespace FormBase
                         DisplayVer();
                         break;
                     case TipoAccion.Modif:
-                        if(Id == null)
+                        if(Id == 0)
                             Id = ObtenerId();
                         CargarRegistro();
                         DisplayMod();
                         break;
                     case TipoAccion.Baja:
-                        if(Id == null)
+                        if(Id == 0)
                             Id = ObtenerId();
                         CargarRegistro();
                         DisplayBaja();

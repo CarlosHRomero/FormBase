@@ -20,6 +20,19 @@ namespace FormBase
 
         protected string _Titulo;
 
+        protected virtual void BajaPaciente()
+        {
+            throw new NotImplementedException();
+        }
+        protected virtual void ModifPaciente()
+        {
+            throw new NotImplementedException();
+        }
+        protected virtual void nuevoProcedimiento()
+        {
+            throw new NotImplementedException();
+        }
+
         private Estados Estado
         {
             set

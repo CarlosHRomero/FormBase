@@ -160,14 +160,14 @@ namespace FormBase
                 //    return true;
                 if (EsClavePrimaria(campo))
                     return true;
-                if (campo.Name == "Dop_Prioridad_D")
+                if (campo.Name == "ESC_ECO_EspPar_N")
                     c.Name = c.Name;
                 String tipoCont = c.GetType().Name;
                 if (c.Name.Length > 3)
                 {
                     if (c.Name.Substring(3).ToLower() == campo.Name.ToLower())
                     {
-                        if (campo.Name == "Evol_Obs")
+                        if (campo.Name == "ESC_ECO_EspPar_N")
                             c.Name = c.Name;
                         var box = c as MaskedTextBox;
                         if ((box is MaskedTextBox))
@@ -251,6 +251,16 @@ namespace FormBase
                                 if (!String.IsNullOrEmpty(c.Text))
                                 {
                                     double f = Convert.ToDouble(c.Text);
+                                    campo.SetValue(Registro, f, null);
+                                }
+                                else
+                                    campo.SetValue(Registro, null, null);
+                            }
+                            else if (campo.PropertyType == typeof(decimal?))
+                            {
+                                if (!String.IsNullOrEmpty(c.Text))
+                                {
+                                    decimal f = Convert.ToDecimal(c.Text);
                                     campo.SetValue(Registro, f, null);
                                 }
                                 else
